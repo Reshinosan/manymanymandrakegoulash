@@ -1,0 +1,1164 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "Pixelify Sans";
+    font-weight: 400;
+    src: url(../fonts/PixelifySans-VariableFont_wght.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Sixtyfour";
+    font-weight: 400;
+    src: url(../fonts/Sixtyfour-Regular-VariableFont_BLED\,SCAN.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "BBH Sans Bartle";
+    font-weight: 400;
+    src: url(../fonts/BBHSansBartle-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Monoton";
+    font-weight: 400;
+    src: url(../fonts/Monoton-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Anton";
+    font-weight: 400;
+    src: url(../fonts/Anton-Regular.ttf) format("truetype");
+}
+
+html {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+}
+
+body{
+    background: #0e0014;
+    color: aliceblue;
+    min-width: 350px;
+    width: 100%;
+    margin: 0;
+}
+
+/* .pc要素はスマートフォンでは非表示 */
+.pc{
+    display: none;
+}
+
+/* .sp要素はスマートフォンでは表示 */
+.sp{
+    display: block;
+}
+
+.space-1{
+    padding: 1px;
+}
+
+.space-2{
+    padding: 10px;
+}
+
+.space-4{
+    padding: 20px;
+}
+
+.space-8{
+    padding: 40px;
+}
+
+/* スクロール切り替え用 */
+section {
+  width: 100%;
+  padding: 0%;
+}
+
+/* カーテン用 */
+.leftCurtainbg, .rightCurtainbg {
+    display: block;
+    content: "";
+    position:fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    background-color: #000000;
+    animation-duration:1.2s;
+    animation-timing-function:ease-in-out;
+    animation-fill-mode:forwards;
+}
+
+.leftCurtainbg {
+    right: 50%;
+    transform: scaleX(0);
+    animation-name:curtainAnimeLeft;
+}
+
+.rightCurtainbg {
+    left: 50%;
+    transform: scaleX(1);
+    animation-name:curtainAnimeRight;
+}
+
+@keyframes curtainAnimeLeft {
+	0% {
+		transform-origin:right;
+		transform:scaleX(1);
+	}
+	50% {
+		transform-origin:left;
+	}
+	100% {
+		transform-origin:left;
+		transform:scaleX(0);
+	}
+}
+
+@keyframes curtainAnimeRight {
+	0% {
+		transform-origin:left;
+		transform:scaleX(1);
+	}
+	50% {
+		transform-origin:right;
+	}
+	100% {
+		transform-origin:right;
+		transform:scaleX(0);
+	}
+}
+
+.fadeout {
+  animation : fadeOut 0.8s;
+  animation-fill-mode: both;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/*bodyにpageOnクラスがついたら出現*/
+body.pageOn #container{
+	animation-name:PageAnimeOn;
+	animation-duration:1s;
+	animation-delay: 0.2s;
+	animation-fill-mode:forwards;
+	opacity: 0;
+}
+
+@keyframes PageAnimeOn{
+	0% {
+	    opacity: 0;
+	}
+	100% {
+	    opacity: 1;
+    }
+}
+
+/* メニューリスト - スマートフォン向け */
+.nicelist {
+    position: absolute;
+    bottom: 70px;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 1;
+    color: aliceblue;
+    text-align: left;
+    z-index: 100;
+    width: 100%;
+    padding-left: 0;
+    margin: auto;
+}
+
+.nicelist ul{
+    padding-left: 0;
+    display: grid;
+}
+
+.nicelist ul li{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    font-feature-settings: "liga" 0;
+    font-family: 'Sixtyfour', serif;
+    display: table-cell;
+    margin: 7px auto;
+}
+
+.nicelist ul li:hover:after{
+    position: absolute;
+    left: -50px;
+    content: "▶";
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.nicelist ul li:first-child {
+    border-left: none;
+}
+
+.nicelist ul li a {
+    font-size: 24px; 
+    color: aliceblue;
+    text-decoration: none;
+    font-feature-settings: "liga" 0;
+    letter-spacing: 1px;
+}
+.nicelist ul li a:hover{
+    letter-spacing: 1px;
+}
+.nicelist ul li a .niceclass1{
+    display: none;
+}
+
+main {
+    width: 100%;
+}
+
+.area {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    position: relative;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.area::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+/* ハンバーガーメニュー */
+.menu-trigger {
+    position: fixed;
+    z-index: 102;
+    width: 45px;
+    height: 30px;
+    margin-right: 0;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+.menu-trigger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #ff84e0;
+    border-radius: 4px;
+    transition: all .3s;
+}
+
+.opened_hamberger{
+    position: fixed;
+    z-index: 101;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    transition: all .3s;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.opened_hamberger.opened{
+    left: 0%;
+}
+
+.menu-trigger span:nth-of-type(1) {
+    top: 0;
+}
+
+.menu-trigger span:nth-of-type(2) {
+    top: 13px;
+}
+
+.menu-trigger span:nth-of-type(3) {
+    top: 26px;
+}
+
+.menu-trigger.opened span:nth-of-type(1){
+    -webkit-transform:translateY(15px) rotate(-45deg);
+    transform: translateY(15px) rotate(-45deg);
+}
+
+.menu-trigger.opened span:nth-of-type(2){
+    opacity: 0;
+}
+
+.menu-trigger.opened span:nth-of-type(3){
+    top: 0;
+    -webkit-transform: translateY(-15px) rotate(45deg);
+    transform: translateY(15px) rotate(45deg);
+}
+
+.opened_hamberger ul{
+    position: absolute;
+    top: 250px;
+    left: 80px;
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 1;
+    color: aliceblue;
+    text-align: left;
+    padding-left: 0;
+    margin: auto;
+}
+
+.opened_hamberger ul li{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    font-feature-settings: "liga" 0;
+    font-family: 'Sixtyfour', serif;
+    display: table-cell;
+    margin: 15px auto;
+}
+
+.opened_hamberger ul li:hover:after{
+    position: absolute;
+    left: -50px;
+    content: "▶";
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.opened_hamberger ul li:first-child {
+    border-left: none;
+}
+
+.opened_hamberger ul li a {
+    font-size: 24px; 
+    color: aliceblue;
+    text-decoration: none;
+    font-feature-settings: "liga" 0;
+    letter-spacing: 1px;
+}
+.opened_hamberger ul li a:hover{
+    letter-spacing: 1px;
+}
+.opened_hamberger ul li a .niceclass1{
+    display: none;
+}
+
+
+/* ここからトップ */
+
+.topheader{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../img/noise.png'), linear-gradient(#000000 5%, #110536 40%, #ad3368 58%,
+    #ff84e0 58%, #9a44a0 59%, #0c141f 70%);
+    background-blend-mode: soft-light;
+    background-size: 50px 50px, cover;
+    overflow: hidden;
+    padding-top: unquote("min(100vh,75%)");
+}
+
+header{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    opacity: 0;
+    width: 100%;
+    height: 50px;
+    background: #000;
+    transition: all .3s;
+}
+
+header.fixed{
+    opacity: 1;
+}
+
+header .pc_menu{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    max-width: 1080px;
+    text-align: center;
+}
+
+header .pc_menu ul{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+header .pc_menu ul li{
+    list-style-type:none;
+    width: 100px;
+}
+
+header .pc_menu ul li a{
+    text-decoration: none;
+    color: aliceblue;
+}
+
+header .pc_menu ul li a:hover{
+    position: relative;
+    cursor: pointer;
+}
+
+header .pc_menu ul li a:hover:after{
+    position: absolute;
+    left: -25px;
+    content: "▶";
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 紫線 */
+
+.line-purple {
+    position: absolute;
+    z-index: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    perspective: 180px;
+    perspective-origin: 50% 40%;
+    overflow: hidden;
+    min-height: 00px;
+  }
+
+.landscape-down {
+    position: absolute;
+    z-index: 2;
+    width: 200%;
+    height: 125%;
+    left: -50%;
+    bottom: -30%;
+    background: -webkit-linear-gradient(top, #CF33D9 3px, transparent 3px), -webkit-linear-gradient(left, #CF33D9 3px, transparent 3px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: -1px -1px, -1px -1px;
+    transform: rotateX(128deg);
+    animation: moveLine 1s infinite linear;
+    min-height: 600px;
+}
+
+@keyframes moveLine{
+    0% {
+        background-position: -50px -50px, -1px -1px;
+    }
+    100% {
+        background-position: -1px -1px, -1px -1px;
+    }
+}
+
+.triangle {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    z-index: 5;
+    width: 200px;
+    height: 200px;
+    border: 5px solid #ddd;
+    border-radius: 10px;
+    transform:translate(-50%, -50%) rotate(45deg) ;
+    animation:squarertake 4s  infinite linear;
+    box-shadow: 0 0 30px 10px #ddd, inset 0 0 30px 10px #ddd;
+}
+
+@keyframes squarertake{
+    0%{
+        transform:translate(-50%, -50%) rotateY(0deg) rotate(45deg);
+    }
+    100%{
+        transform:translate(-50%, -50%) rotateY(360deg) rotate(45deg);
+    }
+}
+
+h1.chathcopy{
+    position: absolute;
+    top: 5vh;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-family: "BBH Sans Bartle", serif;
+    height: 60%;
+}
+
+h1.chathcopy img{
+    position: relative;
+    z-index: 105;
+    width: 100%;
+    max-width: 1080px;
+    filter: drop-shadow(0px 10px 5px #fb93ff);
+}
+
+/* 星 */
+.constellation {
+    background-attachment: scroll;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotate 600s infinite linear;
+}
+
+.star {
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    animation-name: star;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.star.style1 {
+    animation-duration: 0.5s;
+    animation-name: star;
+}
+
+.star.style2 {
+    animation-duration: 1s;
+    animation-name: star;
+}
+
+.star.style3 {
+    animation-duration: 1.5s;
+    animation-name: star;
+}
+
+.star.style4 {
+    animation-duration: 2s;
+    animation-name: starFeat;
+}
+
+.star.tam1 {
+    width: 1px;
+    height: 1px;
+}
+
+.star.tam2 {
+    width: 2px;
+    height: 2px;
+}
+
+.star.tam3 {
+    width: 3px;
+    height: 3px;
+}
+
+.star.opacity1 {
+    opacity: 1;
+}
+
+.star.opacity2 {
+    opacity: .5;
+}
+
+.star.opacity3 {
+    opacity: .1;
+}
+
+@keyframes star {
+    0% {
+        box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.05);
+    }
+    50% {
+        box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.05);
+    }
+}
+
+@keyframes starFeat {
+    0% {
+        background-color: #FFFFFF;
+        box-shadow: 0 0 10px 0px rgba(255, 255, 255, 1);
+    }
+    20% {
+        background-color: #FFC4C4;
+        box-shadow: 0 0 10px 0px rgb(255, 196, 196, 1);
+    }
+    80% {
+        background-color: #C4CFFF;
+        box-shadow: 0 0 10px 0px rgb(196, 207, 255, 1);
+    }
+    100% {
+        background-color: #FFFFFF;
+        box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* 太陽 */
+
+.retro-sun {
+    position: absolute;
+    z-index: 1;
+    width: 280px;
+    height: 280px;
+    left: 50%;
+    top: 35%;
+	place-self: center;
+    background: linear-gradient(0deg, #1f005c, #5b0060, #ca485c, #e16b5c, #ffdb63, #ffe293);
+    mix-blend-mode:lighten ;
+	clip-path: circle(calc(50% - 1px));
+    transform: translate(-50%, -50%);
+    filter: blur(1px);
+    box-shadow: aliceblue 0px 0px 10px 10px;
+}
+
+.retro-sun::before {
+    filter: contrast(39) blur(2px) contrast(3);
+    content: "";
+    grid-area: 1/1;
+    padding: min(50%, 45em);
+    background: linear-gradient(#b6b6b6, #000), linear-gradient(#000, #999, #000) 0/1% 6%;
+    background-blend-mode: screen;
+    mix-blend-mode: darken;
+}
+
+.blur-retro-sun {
+    position: absolute;
+    z-index: 1;
+    width: 280px;
+    height: 280px;
+    left: 0;
+    right: 0;
+    top: 50%;
+	place-self: center;
+    background: white;
+    mix-blend-mode:overlay;
+    transform: translate(0, -50%);
+    filter: blur(80px);
+}
+
+  /* 山 */
+
+.spikes {
+    position: absolute;
+    z-index: 2;
+    top: 38%;
+    background: #2c3e50;
+    width: 100%;
+}
+  
+.spikes::after {
+    position: absolute;
+        transition: all .3s;
+    content: '';
+    right: 0;
+    left: -0%;
+    top: 0%;
+    z-index: 10;
+    display: block;
+    height: 20vh;
+    background-size: 195px 100%;
+    background-image: linear-gradient(25deg, #771d47 25%, transparent 25%), linear-gradient(-25deg, #771d47 25%, transparent 25%);
+    background-position: 0 0;
+    mix-blend-mode: darken;
+}
+
+.spikes.is-active::after{
+    left: 100%;
+}
+
+.web-version{
+    position: absolute;
+    right: 10px;
+    bottom:10px;
+    display: flex;
+    font-family: 'Sixtyfour', serif;
+    justify-content: end;
+}
+
+h2{
+    font-size: 32px;
+    font-family: "BBH Sans Bartle", serif;
+    text-shadow: #000 10px;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーー Works */
+.works{
+    position: relative;
+    width: 100%;
+    background: #000;
+    /* padding-bottom: 20px; */
+}
+
+.works h2{
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.works .works_box{
+    margin: 0;
+    max-width: 1080px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.works .works_box .articles{
+    position: relative;
+    margin: 0;
+    color: aliceblue;
+    width: 100%;
+    line-height: 0;
+}
+
+.works .works_box .articles .credits{
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    font-family: "M PLUS Rounded 1c";
+    text-align: right;
+    font-size: 14px;
+    line-height: 1.5;
+    width: 100%;
+    height: 90px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.works .works_box .articles .credits p{
+    margin: 0;
+    margin-right: 10px;
+}
+
+.works .works_box .articles img{
+    width: 100%;
+}
+
+
+/* ーーーーーーーーー プロフィール */
+.profile{
+    position: relative;
+    width: 100%;
+    font-family: "M PLUS Rounded 1c";
+    min-height: 100vh;
+}
+
+.profile .base_overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.profile .bg_overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7)
+}
+
+.profile video {
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+}
+
+.profile .contents{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.profile img{
+    display: block;
+    margin: 10px;
+}
+
+.profile h2{
+    width: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.profile h3{
+    font-family: "M PLUS Rounded 1c";
+    font-weight: 200;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile h3:before,
+.profile h3:after{
+    content: "";
+    height: 3px;
+    flex-grow: 1;
+    background-color: #00eeff;
+    box-shadow: 0px 0px 20px 3px;
+}
+
+.profile h3:before{
+    margin-right: 1rem;
+}
+
+.profile h3:after{
+    margin-left: 1rem;
+}
+
+.profile .prof-flex{
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    max-width: 1480px; 
+    width: 90%;
+    margin: auto;
+}
+
+.profile .prof-flex .prof-flex-left{
+    display: block;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+/* 写真と名前と生年月日 */
+.profile .name-area{
+    position: relative;
+    height: 340px;
+    margin: auto;
+    border-radius: 20px;
+    padding: 30px;
+    border: #fc65d1 3px solid;
+    box-shadow: #fc65d1 0px 0px 20px 0px, inset #fc65d1 0px 0px 20px 0px ;
+    overflow: hidden;
+    display: block;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.profile .prof-img-border .prof-icon{
+    width: 180px;
+    height: 180px;
+    margin: auto;
+}
+
+.profile .img-name{
+    width: 100px;
+    margin: 20px auto;
+}
+
+.profile .name-text-area{
+    text-align: center;
+    font-family: "Anton", "M PLUS Rounded 1c";
+    font-size: 26px;
+}
+
+.profile .name-text-area .skill_name{
+    font-size: 20px;
+}
+
+/* プロフィール文言 */
+.profile .profile_text{
+    text-align: left;
+    line-height: 1.75;
+}
+
+.profile .profile_text.wine{
+    position: relative;
+}
+
+.profile .profile_text.wine:after{
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    content: "";
+    background: url('../img/headericon3.png') no-repeat no-repeat;
+    width: 125px;
+    height: 125px;
+    transform: rotate(15deg);
+    background-size: 125px 125px;
+    filter: drop-shadow(0px 10px 5px #3ad8ff);
+}
+
+/* 経歴 */
+.profile .about-area{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.profile .about-area:after{
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 2.5%;
+    width: 100%;
+    height: 20px;
+}
+
+.profile .about-area .about-box{
+    width: 100%;
+    margin: auto;
+    padding-top: 0;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーーー special thanks */
+.specialthanks{
+    position: relative;
+    width: 100%;
+}
+
+.specialthanks h2{
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+footer{
+    height: 100px;
+    background: #000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* -----------------------------------------------------------------ここからタブレット (min-width: 421px) */
+
+@media screen and (min-width: 421px){
+    /* スマートフォン向けの設定を上書き */
+
+    /* h1.chathcopy */
+    h1.chathcopy{
+        font-size: 32px;
+    }
+
+    /* h2 */
+    h2{
+        font-size: 40px;
+    }
+
+    /* メニューリスト */
+    .nicelist ul li a{
+      font-size: 32px;
+      letter-spacing: 1px; /* スマートフォン向けと同じだが、明示的に */
+    }
+    .nicelist ul li a:hover{
+      letter-spacing: 1px; /* スマートフォン向けと同じだが、明示的に */
+    }
+
+    .profile{
+        height: 110vh;
+    }
+
+    /* プロフィール h3 */
+    .profile h3{
+        font-size: 28px;
+    }
+
+    /* 履歴エリアの表示 */
+    .profile .about-area{
+        display: block; /* スマートフォンと同じだが、明示的に */
+    }
+    .profile .about-area .about-box{
+        width: 100%; /* スマートフォンと同じだが、明示的に */
+        margin: auto; /* スマートフォンと同じだが、明示的に */
+        padding-top: 0;
+    }
+
+    /* Worksセクション */
+    .works .works_box {
+        margin: 0; /* スマートフォンと同じだが、明示的に */
+        flex: 2; /* 2列表示 */
+    }
+    .works .works_box .articles {
+        margin: 0; /* スマートフォンと同じだが、明示的に */
+        width: 50%; /* 2列表示のため50% */
+        line-height: 0; /* スマートフォンと同じだが、明示的に */
+    }
+    .works .works_box .articles img{
+        width: 100%; /* スマートフォンと同じだが、明示的に */
+    }
+
+    footer:after{
+    right: 0%;
+    width: 125px;
+    height: 125px;
+    transform: translate(-50%, -50%);
+    background-size: 125px 125px;
+    }
+}
+
+@media screen and (min-width: 421px) and (max-width: 1000px) and (orientation:landscape) {
+    h1.chathcopy img {
+        width: 50%;
+    }
+    .landscape-down {
+        height: 100%;
+        transform: rotateX(85deg);
+        min-height: 0px;
+    }
+    .opened_hamberger ul {
+        top: 100px;
+    }
+    .nicelist {
+        bottom: 10px;
+    }
+    .nicelist ul li a {
+        font-size: 22px;
+    }
+
+    .profile{
+        min-height: 1180px;
+    }
+}
+
+/* -----------------------------------------------------------------ここからタブレット横向き (min-width: 1001px) */
+
+@media screen and (min-width: 1001px){
+    /* PCでは強力なスナップを適用 */
+    html {
+        scroll-snap-type: y mandatory;
+    }
+
+    /* タブレット向けの設定を上書き */
+
+    /* .pc要素はPCでは表示 */
+    .pc{
+        display: block;
+    }
+    /* .sp要素はPCでは非表示 */
+    .sp{
+        display: none;
+    }
+
+    /* h1.chathcopy */
+    h1.chathcopy{
+        font-size: 42px;
+    }
+
+    /* h2 */
+    h2{
+        font-size: 42px;
+    }
+
+    .menu-trigger{
+        display: none;
+    }
+
+    /* メニューリスト */
+    .nicelist ul li a{
+      font-size: 32px; /* タブレットと同じだが、明示的に */
+      letter-spacing: normal; /* PCではletter-spacingをリセット */
+    }
+    .nicelist ul li a:hover{
+      letter-spacing: normal; /* PCではletter-spacingをリセット */
+    }
+    .nicelist ul li a .niceclass1{
+        display: inline; /* PCではniceclass1を表示 */
+    }
+
+    /* プロフィールセクションの高さ */
+    .profile{
+        min-height: 1150px;
+    }
+
+    /* プロフィール h3 */
+    .profile h3{
+        font-size: 24px; /* 元のPCサイズ */
+    }
+
+    /* 履歴エリアの表示 */
+    .profile .about-area{
+        display: flex; /* PCではflexboxで横並び */
+        justify-content: space-around;
+    }
+    .profile .about-area .about-box{
+        width: 80%; /* PCでは幅を調整 */
+        padding-top: 0;
+    }
+
+    /* Worksセクション */
+    .works .works_box{
+        margin: auto;
+        max-width: 1080px;
+        flex: 3; /* 3列表示 */
+    }
+    .works .works_box .articles{
+        margin: 40px auto;
+        width: auto; /* flexアイテムのデフォルトの幅に任せる */
+        line-height: initial; /* line-heightをデフォルトにリセット */
+    }
+    .works .works_box .articles img{
+        width: 300px; /* PC向け画像の幅 */
+    }
+}
+
+
+@media screen and (min-width: 1201px){
+
+    .profile .name-area{
+        height: unset;
+    }
+
+    .profile .prof-img-border .prof-icon{
+        width: 350px;
+        height: 350px;
+        margin: auto;
+    }
+
+    .profile{
+         min-height: auto;
+    }
+
+    .profile .prof-flex .prof-flex-left {
+        width: 45%;
+    }
+
+    .profile .about-area{
+        width: 45%;
+    }
+
+}
+
+@media screen and (min-width: 1301px){
+
+    h1.chathcopy{
+        z-index: 7;
+    }
+
+    .profile{
+        min-height: 800px;
+    }
+
+}
