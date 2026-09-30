@@ -80,27 +80,27 @@ $(function(){
     $('body').bind('touchmove', floatMenu);
   
     // Intersection Observer for slide effect
-    const observerOptions = {
-      threshold: 0.5
-    };
+    // const observerOptions = {
+    //   threshold: 0.5
+    // };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-active');
-        } else {
-          entry.target.classList.remove('is-active');
-        }
-      });
-    }, observerOptions);
+    // const observer = new IntersectionObserver((entries) => {
+    //   entries.forEach(entry => {
+    //     if (entry.isIntersecting) {
+    //       entry.target.classList.add('is-active');
+    //     } else {
+    //       entry.target.classList.remove('is-active');
+    //     }
+    //   });
+    // }, observerOptions);
 
-    document.querySelectorAll('.area').forEach(section => {
-      observer.observe(section);
-    });
+    // document.querySelectorAll('.area').forEach(section => {
+    //   observer.observe(section);
+    // });
 
-    document.querySelectorAll('.area').forEach(section => {
-      observer.observe(section);
-    });
+    // document.querySelectorAll('.area').forEach(section => {
+    //   observer.observe(section);
+    // });
 
   });
 }); 

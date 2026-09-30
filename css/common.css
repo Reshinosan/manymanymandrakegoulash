@@ -227,12 +227,10 @@ main {
     width: 100%;
     min-height: 100vh;
     position: relative;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .area::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
 }
 
 /* ハンバーガーメニュー */
@@ -782,9 +780,9 @@ h2{
 }
 
 .profile .contents{
-    position: absolute;
-    left: 0;
-    top: 0;
+    /* position: absolute; */
+    /* left: 0; */
+    /* top: 0; */
     z-index: 2;
     width: 100%;
     height: 100%;
@@ -975,10 +973,6 @@ footer{
       letter-spacing: 1px; /* スマートフォン向けと同じだが、明示的に */
     }
 
-    .profile{
-        height: 110vh;
-    }
-
     /* プロフィール h3 */
     .profile h3{
         font-size: 28px;
@@ -986,26 +980,26 @@ footer{
 
     /* 履歴エリアの表示 */
     .profile .about-area{
-        display: block; /* スマートフォンと同じだが、明示的に */
+        display: block; 
     }
     .profile .about-area .about-box{
-        width: 100%; /* スマートフォンと同じだが、明示的に */
-        margin: auto; /* スマートフォンと同じだが、明示的に */
+        width: 100%;
+        margin: auto;
         padding-top: 0;
     }
 
     /* Worksセクション */
     .works .works_box {
-        margin: 0; /* スマートフォンと同じだが、明示的に */
-        flex: 2; /* 2列表示 */
+        margin: 0;
+        flex: 2;
     }
     .works .works_box .articles {
-        margin: 0; /* スマートフォンと同じだが、明示的に */
-        width: 50%; /* 2列表示のため50% */
-        line-height: 0; /* スマートフォンと同じだが、明示的に */
+        margin: 0;
+        width: 50%;
+        line-height: 0;
     }
     .works .works_box .articles img{
-        width: 100%; /* スマートフォンと同じだが、明示的に */
+        width: 100%;
     }
 
     footer:after{
@@ -1114,16 +1108,21 @@ footer{
     }
     .works .works_box .articles{
         margin: 40px auto;
-        width: auto; /* flexアイテムのデフォルトの幅に任せる */
-        line-height: initial; /* line-heightをデフォルトにリセット */
+        width: auto; 
+        line-height: initial; 
     }
     .works .works_box .articles img{
-        width: 300px; /* PC向け画像の幅 */
+        width: 300px;
     }
 }
 
 
 @media screen and (min-width: 1201px){
+
+    .area {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
 
     .profile .name-area{
         height: unset;
@@ -1149,14 +1148,11 @@ footer{
 
 }
 
+/* -----------------------------------------------------------------ここからPC調整用 (min-width: 1301px) */
 @media screen and (min-width: 1301px){
 
     h1.chathcopy{
         z-index: 7;
-    }
-
-    .profile{
-        min-height: 800px;
     }
 
 }
